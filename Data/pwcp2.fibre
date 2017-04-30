@@ -1,0 +1,72 @@
+//-----------------------------------------------------------------------------------------------------
+// Paperwork Campaign Level 2 Fibre Script
+//-----------------------------------------------------------------------------------------------------
+include "stdlib.fibre";
+
+var g_tick = 0;
+
+function unlockDoor()
+{
+	log("Unlocking door");
+	item_set_locked(29, false);
+}
+
+// Called when level is first started.
+function on_start() 
+{
+	game_set_win_money(100000);
+	game_set_fail_seconds(60);
+	game_set_population_cap(30);
+	game_set_intern_cap(20);
+
+	//item_spawn(0, "item_spawn", 12, 16, 0);
+	//item_spawn(1, "item_spawn", 21, 16, 0);
+
+	item_set_available(0, "item_food_test", true);
+	item_set_available(0, "item_couch_test", true);
+	item_set_available(0, "item_test", true);
+	item_set_available(0, "item_door", true);
+	item_set_available(0, "item_safe_test", true);
+	item_set_available(0, "item_desk_test", true);
+
+	//item_spawn(0, "item_desk_test", 15, 15, 0);
+	//item_spawn(0, "item_safe_test", 10, 16, 0);
+
+	//unit_spawn(0, 13, 13, 90, 1, 1);
+	//unit_spawn(0, 11, 13, 270, 0, 0);
+	//unit_spawn(0, 12, 14, 0, 0, 0);
+	//unit_spawn(0, 12, 12, 180, 0, 0);
+
+	//spawnMens(10);
+
+	//g_door = item_spawn(0, "item_door", 6, 9, 0);
+	//item_set_locked(g_door, true);
+	//toggelLock();
+
+	player_set_rep(0, 0, 5);
+	player_set_rep(0, 1, 5);
+	player_set_rep(1, 0, 5);
+	player_set_rep(1, 1, 5);
+
+	ai_enable(1, true);
+
+	game_spawn_contract();
+	game_spawn_resume();
+
+	trigger_tick(20 * 15, unlockDoor);
+}
+
+function spawnMens(count)
+{
+	if (count > 0)
+	{
+		unit_spawn(0, 11, 13, 0, 1, 1);
+		spawnMens(count - 1);
+	}
+}
+
+// Called every tick.
+function on_tick(tick, time) 
+{
+	g_tick = tick;
+}

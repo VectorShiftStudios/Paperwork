@@ -1,0 +1,33 @@
+//-----------------------------------------------------------------------------------------------------
+// Paperwork Campaign Level 1 Fibre Script
+//-----------------------------------------------------------------------------------------------------
+include "stdlib.fibre";
+
+var g_tick = 0;
+
+// Called when level is first started.
+function on_start() 
+{
+	game_set_win_money(100000);
+	game_set_fail_seconds(60);
+	game_set_population_cap(30);
+	game_set_intern_cap(20);
+
+	item_spawn(0, "item_spawn", 12, 16, 0);
+	item_spawn(1, "item_spawn", 21, 16, 0);
+
+	item_set_available(0, "item_food_test", true);
+	item_set_available(0, "item_couch_test", true);
+	item_set_available(0, "item_test", true);
+	item_set_available(0, "item_door", true);
+	item_set_available(0, "item_safe_test", true);
+	item_set_available(0, "item_desk_test", true);
+
+	unit_spawn(0, 8, 13, 0, 0, 0);
+}
+
+// Called every tick.
+function on_tick(tick, time) 
+{
+	g_tick = tick;
+}

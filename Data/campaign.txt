@@ -1,0 +1,20 @@
+[
+	{
+		name : "Testing Ground",
+		asset : "testingGround",
+		visible : true,
+		playable : true
+	},
+	{
+		name : "Tutorial",
+		asset : "tutorial",
+		visible : true,
+		playable : true
+	},
+	{
+		name : "lvl_test_00a",
+		asset : "lvl_test_00a",
+		visible : true,
+		playable : true
+	}
+]

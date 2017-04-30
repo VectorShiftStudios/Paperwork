@@ -1,0 +1,28 @@
+//-----------------------------------------------------------------------------------------------------
+// FibreScript Standard Library
+//-----------------------------------------------------------------------------------------------------
+
+var GAME_VERSION = game_get_version();
+
+var EVENT_GAME_FINISH = 1;
+
+// Funcitonal Testing
+function test_vm() {
+	log(!true);
+	log(-6);
+
+	log(1 * 2);
+	log(4 / 2);
+	log(1 + 1);
+	log("a" + "b");
+	log(8 - 2);
+	log(7 % 2);
+
+
+	log(1 == 1);
+	log(1 == 2);
+	log(true == true);
+	log(true == false);
+	log("a" == "a");
+	log("a" == "b");
+}

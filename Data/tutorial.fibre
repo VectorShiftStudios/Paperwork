@@ -1,0 +1,170 @@
+//-----------------------------------------------------------------------------------------------------
+// Level 1 Fibre Script
+//-----------------------------------------------------------------------------------------------------
+include "stdlib.fibre";
+
+//-----------------------------------------------------------------------------------------------------
+// Globals
+//-----------------------------------------------------------------------------------------------------
+var g_tick = 0;
+var g_bob;
+var g_bill;
+
+function on_mumble()
+{
+	unit_set_speech(g_bob, "Moan grumble grumble...");
+	wait_time(50);
+	unit_set_speech(g_bill, "Blah blah blah...");
+}
+
+function on_attacker_dead()
+{
+	cinematic_start(0);
+	player_move_camera(0, 8, 0, 13, 50, 0.1);
+	wait_time(50);
+
+	if (unit_get_alive(g_bob))
+	{
+		unit_set_speech(g_bob, "I survived!");
+	}
+
+	if (unit_get_alive(g_bill))
+	{
+		unit_set_speech(g_bill, "I survived!");
+	}
+
+	wait_time(50);
+
+	var save_everyone_goal = (unit_get_alive(g_bob) && unit_get_alive(g_bill));
+
+	if (save_everyone_goal)
+	{
+		unit_set_speech(g_bob, "You saved both of us!");
+		wait_time(40);
+		unit_set_speech(g_bob, "You can now place your own office equipment!");
+		wait_time(40);
+		unit_set_speech(g_bill, "Time to make money!");
+		wait_time(20);
+		sound_play(0, 11);
+	}
+
+	wait_time(20);
+	cinematic_stop(0);
+
+	if (save_everyone_goal)
+	{
+		item_set_available(0, "item_food_test", true);
+		item_set_available(0, "item_couch_test", true);
+		item_set_available(0, "item_test", true);
+		item_set_available(0, "item_door", true);
+		item_set_available(0, "item_safe_test", true);
+
+		item_spawn_notify(0, "item_food_test");
+		item_spawn_notify(0, "item_couch_test");
+		item_spawn_notify(0, "item_test");
+		item_spawn_notify(0, "item_door");
+		item_spawn_notify(0, "item_safe_test");
+
+		trigger_tick(g_tick + 60, on_mumble);
+	}
+
+	//contract_spawn();
+	//contract_spawn();
+	//contract_spawn();
+
+	trigger_tick(g_tick + 20, game_spawn_resume);
+	//trigger_tick(g_tick + 20, contract_spawn);
+}
+
+function play_intro()
+{
+	cinematic_start(0);
+	music_play(0, 2);	
+	player_move_camera(0, 8, 0, 13, 40, 0.1);	
+
+	wait_time(40);
+	g_bob = unit_spawn(0, 8, 13, 0, 1, 1);
+	sound_play(0, 5);
+
+	wait_time(20);
+	unit_set_speech(g_bob, "Yes, this is dog.");	
+
+	player_move_camera(0, 8, 0, 13, 50, 0.01);
+	
+	wait_time(100);
+	g_bill = unit_spawn(0, 9, 13, 0, 1, 1);
+	sound_play(0, 5);
+
+	wait_time(20);
+	unit_set_speech(g_bill, "Welcome to your first office!");
+	
+	wait_time(100);
+	unit_set_speech(g_bill, "Here is some equipment to get you started!");
+
+	wait_time(50);
+	item_spawn(0, "item_desk_test", 10, 15, 0);
+	sound_play(0, 5);
+	wait_time(5);
+	item_spawn(0, "item_test", 8, 18, 0);
+	sound_play(0, 5);
+	wait_time(5);
+	item_spawn(0, "item_safe_test", 8, 11, 0);
+	sound_play(0, 5);
+	wait_time(5);
+	item_spawn(0, "item_safe_test", 9, 11, 0);
+	sound_play(0, 5);
+	wait_time(5);
+	item_spawn(0, "item_safe_test", 11, 11, 0);
+	sound_play(0, 5);
+	wait_time(5);
+	item_spawn(0, "item_safe_test", 6, 13, 0);
+	sound_play(0, 5);
+	wait_time(50);
+
+	var attacker = unit_spawn(1, 10, 14, 180, 0, 0);
+	unit_set_speech(attacker, "Attack!");
+	unit_set_stamina(attacker, 50);
+	sound_play(0, 5);
+
+	wait_time(50);	
+	music_play(0, 1);
+	cinematic_stop(0);
+
+	trigger_unit_dead(attacker, on_attacker_dead);
+}
+
+// Called at the start of a level.
+function on_start() 
+{
+	game_set_win_money(100000);
+	game_set_fail_seconds(60);
+	game_set_population_cap(30);
+	game_set_intern_cap(20);
+
+	// Must always spawn start points ASAP!
+	item_spawn(0, "item_spawn", 12, 16, 0);
+	item_spawn(1, "item_spawn", 21, 16, 0);
+
+	var door = item_spawn(4, "item_door", 6, 7, 0);
+	item_set_locked(door, true);
+	door = item_spawn(4, "item_door", 9, 6, 1);
+	item_set_locked(door, true);
+
+	player_set_rep(0, 0, 5);
+	player_set_rep(0, 1, 5);
+	player_set_rep(1, 0, 5);
+	player_set_rep(1, 1, 5);
+
+	play_intro();
+}
+
+// Called every tick.
+function on_tick(tick, time) 
+{
+	g_tick = tick;
+}
+
+function on_win(winner_id)
+{
+	//if (winner_id == 0) unlock_level
+}

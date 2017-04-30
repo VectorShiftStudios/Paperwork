@@ -1,0 +1,202 @@
+Data:
+D0		BOOL, False
+D1		BOOL, True
+D2		UNDEFINED, undefined
+D3		FUNCTION, log, Interop(10)
+D4		FUNCTION, game_get_version, Interop(11)
+D5		FUNCTION, game_set_win_money, Interop(12)
+D6		FUNCTION, game_set_fail_seconds, Interop(13)
+D7		FUNCTION, game_set_population_cap, Interop(14)
+D8		FUNCTION, game_set_intern_cap, Interop(15)
+D9		FUNCTION, game_spawn_contract, Interop(16)
+D10		FUNCTION, game_spawn_resume, Interop(17)
+D11		FUNCTION, item_spawn, Interop(18)
+D12		FUNCTION, item_set_locked, Interop(19)
+D13		FUNCTION, unit_spawn, Interop(20)
+D14		FUNCTION, unit_set_speech, Interop(21)
+D15		FUNCTION, unit_set_stamina, Interop(22)
+D16		FUNCTION, unit_get_alive, Interop(23)
+D17		FUNCTION, player_set_money, Interop(24)
+D18		FUNCTION, player_move_camera, Interop(25)
+D19		FUNCTION, player_set_rep, Interop(26)
+D20		FUNCTION, item_set_available, Interop(27)
+D21		FUNCTION, item_spawn_notify, Interop(28)
+D22		FUNCTION, cinematic_start, Interop(29)
+D23		FUNCTION, cinematic_stop, Interop(30)
+D24		FUNCTION, music_play, Interop(31)
+D25		FUNCTION, sound_play, Interop(32)
+D26		FUNCTION, ai_enable, Interop(33)
+D27		FUNCTION, trigger_tick, Interop(34)
+D28		FUNCTION, trigger_entity_gone, Interop(35)
+D29		FUNCTION, trigger_unit_dead, Interop(36)
+D30		FUNCTION, wait_time, Interop(37)
+D31		NUMBER, 1
+D32		FUNCTION, test_vm, P3
+D33		NUMBER, 6
+D34		NUMBER, 2
+D35		NUMBER, 4
+D36		STRING, "a"
+D37		STRING, "b"
+D38		NUMBER, 8
+D39		NUMBER, 7
+D40		NUMBER, 0
+D41		FUNCTION, unlockDoor, P35
+D42		STRING, "Unlocking door"
+D43		NUMBER, 29
+D44		FUNCTION, cycleMusic, P43
+D45		FUNCTION, on_start, P49
+D46		NUMBER, 100000
+D47		NUMBER, 60
+D48		NUMBER, 30
+D49		NUMBER, 20
+D50		STRING, "item_food_test"
+D51		STRING, "item_couch_test"
+D52		STRING, "item_test"
+D53		STRING, "item_test_1"
+D54		STRING, "item_door"
+D55		STRING, "item_safe_test"
+D56		STRING, "item_desk_test"
+D57		NUMBER, 5
+D58		NUMBER, 15
+D59		FUNCTION, spawnMens, P118
+D60		NUMBER, 11
+D61		NUMBER, 13
+D62		FUNCTION, on_tick, P132
+
+Program:
+P0		CAL D4(game_get_version, Interop(11)), G0, 0
+P1		MOV G1, D31(1)
+P2		JMP P33
+P3		FNC 0
+P4		NOT L0, D1(True)
+P5		CAL D3(log, Interop(10)), L0, 1
+P6		NEG L0, D33(6)
+P7		CAL D3(log, Interop(10)), L0, 1
+P8		MUL L0, D31(1), D34(2)
+P9		CAL D3(log, Interop(10)), L0, 1
+P10		DIV L0, D35(4), D34(2)
+P11		CAL D3(log, Interop(10)), L0, 1
+P12		INC L0, D31(1), D31(1)
+P13		CAL D3(log, Interop(10)), L0, 1
+P14		INC L0, D36("a"), D37("b")
+P15		CAL D3(log, Interop(10)), L0, 1
+P16		DEC L0, D38(8), D34(2)
+P17		CAL D3(log, Interop(10)), L0, 1
+P18		MOD L0, D39(7), D34(2)
+P19		CAL D3(log, Interop(10)), L0, 1
+P20		EQL L0, D31(1), D31(1)
+P21		CAL D3(log, Interop(10)), L0, 1
+P22		EQL L0, D31(1), D34(2)
+P23		CAL D3(log, Interop(10)), L0, 1
+P24		EQL L0, D1(True), D1(True)
+P25		CAL D3(log, Interop(10)), L0, 1
+P26		EQL L0, D1(True), D0(False)
+P27		CAL D3(log, Interop(10)), L0, 1
+P28		EQL L0, D36("a"), D36("a")
+P29		CAL D3(log, Interop(10)), L0, 1
+P30		EQL L0, D36("a"), D37("b")
+P31		CAL D3(log, Interop(10)), L0, 1
+P32		RET 0
+P33		MOV G2, D40(0)
+P34		JMP P42
+P35		FNC 0
+P36		MOV L0, D42("Unlocking door")
+P37		CAL D3(log, Interop(10)), L0, 1
+P38		MOV L0, D43(29)
+P39		MOV L1, D0(False)
+P40		CAL D12(item_set_locked, Interop(19)), L0, 2
+P41		RET 0
+P42		JMP P48
+P43		FNC 0
+P44		MOV L0, D40(0)
+P45		MOV L1, D31(1)
+P46		CAL D24(music_play, Interop(31)), L0, 2
+P47		RET 0
+P48		JMP P117
+P49		FNC 0
+P50		MOV L0, D31(1)
+P51		MOV L1, D44(cycleMusic, P43)
+P52		CAL D27(trigger_tick, Interop(34)), L0, 2
+P53		MOV L0, D46(100000)
+P54		CAL D5(game_set_win_money, Interop(12)), L0, 1
+P55		MOV L0, D47(60)
+P56		CAL D6(game_set_fail_seconds, Interop(13)), L0, 1
+P57		MOV L0, D48(30)
+P58		CAL D7(game_set_population_cap, Interop(14)), L0, 1
+P59		MOV L0, D49(20)
+P60		CAL D8(game_set_intern_cap, Interop(15)), L0, 1
+P61		MOV L0, D40(0)
+P62		MOV L1, D50("item_food_test")
+P63		MOV L2, D1(True)
+P64		CAL D20(item_set_available, Interop(27)), L0, 3
+P65		MOV L0, D40(0)
+P66		MOV L1, D51("item_couch_test")
+P67		MOV L2, D1(True)
+P68		CAL D20(item_set_available, Interop(27)), L0, 3
+P69		MOV L0, D40(0)
+P70		MOV L1, D52("item_test")
+P71		MOV L2, D1(True)
+P72		CAL D20(item_set_available, Interop(27)), L0, 3
+P73		MOV L0, D40(0)
+P74		MOV L1, D53("item_test_1")
+P75		MOV L2, D1(True)
+P76		CAL D20(item_set_available, Interop(27)), L0, 3
+P77		MOV L0, D40(0)
+P78		MOV L1, D54("item_door")
+P79		MOV L2, D1(True)
+P80		CAL D20(item_set_available, Interop(27)), L0, 3
+P81		MOV L0, D40(0)
+P82		MOV L1, D55("item_safe_test")
+P83		MOV L2, D1(True)
+P84		CAL D20(item_set_available, Interop(27)), L0, 3
+P85		MOV L0, D40(0)
+P86		MOV L1, D56("item_desk_test")
+P87		MOV L2, D1(True)
+P88		CAL D20(item_set_available, Interop(27)), L0, 3
+P89		MOV L0, D40(0)
+P90		MOV L1, D40(0)
+P91		MOV L2, D57(5)
+P92		CAL D19(player_set_rep, Interop(26)), L0, 3
+P93		MOV L0, D40(0)
+P94		MOV L1, D31(1)
+P95		MOV L2, D57(5)
+P96		CAL D19(player_set_rep, Interop(26)), L0, 3
+P97		MOV L0, D31(1)
+P98		MOV L1, D40(0)
+P99		MOV L2, D57(5)
+P100	CAL D19(player_set_rep, Interop(26)), L0, 3
+P101	MOV L0, D31(1)
+P102	MOV L1, D31(1)
+P103	MOV L2, D57(5)
+P104	CAL D19(player_set_rep, Interop(26)), L0, 3
+P105	MOV L0, D31(1)
+P106	MOV L1, D1(True)
+P107	CAL D26(ai_enable, Interop(33)), L0, 2
+P108	CAL D9(game_spawn_contract, Interop(16)), L0, 0
+P109	CAL D10(game_spawn_resume, Interop(17)), L0, 0
+P110	MUL L0, D49(20), D57(5)
+P111	MOV L1, D9(game_spawn_contract, Interop(16))
+P112	CAL D27(trigger_tick, Interop(34)), L0, 2
+P113	MUL L0, D49(20), D58(15)
+P114	MOV L1, D41(unlockDoor, P35)
+P115	CAL D27(trigger_tick, Interop(34)), L0, 2
+P116	RET 0
+P117	JMP P131
+P118	FNC 1
+P119	GRT L1, L0, D40(0)
+P120	JIZ L1, P130
+P121	MOV L1, D40(0)
+P122	MOV L2, D60(11)
+P123	MOV L3, D61(13)
+P124	MOV L4, D40(0)
+P125	MOV L5, D31(1)
+P126	MOV L6, D31(1)
+P127	CAL D13(unit_spawn, Interop(20)), L1, 6
+P128	DEC L1, L0, D31(1)
+P129	CAL D59(spawnMens, P118), L1, 1
+P130	RET 0
+P131	JMP P135
+P132	FNC 2
+P133	MOV G2, L0
+P134	RET 0
+
