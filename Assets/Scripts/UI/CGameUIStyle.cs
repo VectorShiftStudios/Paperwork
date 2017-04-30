@@ -22,4 +22,6 @@ public class CGameUIStyle : MonoBehaviour
 	public Color ThemeColorC;
 	public Color ThemeColorD;
 	public Color ThemeColorE;
+	public Color ThemeColorF;
+	public Color ThemeColorG;
 }

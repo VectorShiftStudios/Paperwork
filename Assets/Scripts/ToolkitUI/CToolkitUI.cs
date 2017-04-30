@@ -229,6 +229,8 @@ public class CToolkitUI : MonoBehaviour
 	public Color ToolbarButtonHighlight;
 	public Color ToolbarButtonWarning;
 
+	public Sprite Blip;
+
 	public Sprite BrushImage;
 	public Sprite ModelImage;
 	public Sprite SheetImage;

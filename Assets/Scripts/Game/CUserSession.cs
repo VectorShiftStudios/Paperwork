@@ -223,7 +223,7 @@ public class CUserSession
 
 		GameObject empWinTitleText = _ui.CreateElement(empWinTitle);
 		Text empWinTitleTextComp = empWinTitleText.AddComponent<Text>();
-		empWinTitleTextComp.text = "Employees";
+		empWinTitleTextComp.text = "EMPLOYEES";
 		empWinTitleTextComp.font = _style.FontA;
 		empWinTitleTextComp.alignment = TextAnchor.MiddleLeft;
 		_ui.SetTransform(empWinTitleText, 5, 0, 200, 26);
@@ -240,12 +240,108 @@ public class CUserSession
 		_ui.AddImage(empWinListSideBar, _style.ThemeColorB);
 		_ui.SetTransform(empWinListSideBar, 0, 0, 54, 500 - 28);
 
+		// Header
+		{
+			GameObject empWinH = _ui.CreateElement(empWinListBack);
+			Text empWinHText = empWinH.AddComponent<Text>();
+			empWinHText.text = "Name";
+			empWinHText.font = _style.FontA;
+			empWinHText.alignment = TextAnchor.MiddleLeft;
+			_ui.SetTransform(empWinH, 60, 0, 100, 20);
+		}
+
+		{
+			GameObject empWinH = _ui.CreateElement(empWinListBack);
+			Text empWinHText = empWinH.AddComponent<Text>();
+			empWinHText.text = "Rank";
+			empWinHText.font = _style.FontA;
+			empWinHText.alignment = TextAnchor.MiddleLeft;
+			_ui.SetTransform(empWinH, 180, 0, 100, 20);
+		}
+
+		{
+			GameObject empWinH = _ui.CreateElement(empWinListBack);
+			Text empWinHText = empWinH.AddComponent<Text>();
+			empWinHText.text = "IQ";
+			empWinHText.font = _style.FontA;
+			empWinHText.alignment = TextAnchor.MiddleLeft;
+			_ui.SetTransform(empWinH, 300, 0, 100, 20);
+		}
+
+		{
+			GameObject empWinH = _ui.CreateElement(empWinListBack);
+			Text empWinHText = empWinH.AddComponent<Text>();
+			empWinHText.text = "Salary";
+			empWinHText.font = _style.FontA;
+			empWinHText.alignment = TextAnchor.MiddleLeft;
+			_ui.SetTransform(empWinH, 400, 0, 100, 20);
+		}
+
+		{
+			GameObject empWinH = _ui.CreateElement(empWinListBack);
+			Text empWinHText = empWinH.AddComponent<Text>();
+			empWinHText.text = "Level";
+			empWinHText.font = _style.FontA;
+			empWinHText.alignment = TextAnchor.MiddleLeft;
+			_ui.SetTransform(empWinH, 500, 0, 100, 20);
+		}
+
+		{
+			GameObject empWinH = _ui.CreateElement(empWinListBack);
+			Text empWinHText = empWinH.AddComponent<Text>();
+			empWinHText.text = "Status";
+			empWinHText.font = _style.FontA;
+			empWinHText.alignment = TextAnchor.MiddleLeft;
+			_ui.SetTransform(empWinH, 600, 0, 100, 20);
+		}
+
+		{
+			GameObject empWinH = _ui.CreateElement(empWinListBack);
+			Text empWinHText = empWinH.AddComponent<Text>();
+			empWinHText.text = "Skill";
+			empWinHText.font = _style.FontA;
+			empWinHText.alignment = TextAnchor.MiddleLeft;
+			_ui.SetTransform(empWinH, 700, 0, 100, 20);
+		}
+
+		GameObject empWinHeaderSep = _ui.CreateElement(empWinListBack);
+		_ui.AddImage(empWinHeaderSep, _style.ThemeColorE);
+		_ui.SetTransform(empWinHeaderSep, 0, -22, 784, 2);
+
+		GameObject empWinEntryList = _ui.CreateElement(empWinListBack, "entries");
+		empWinEntryList.AddComponent<RectMask2D>();
+		//_ui.AddImage(empWinEntryList, _style.ThemeColorA);
+		_ui.SetTransform(empWinEntryList, 0, -24, 774, 500 - 28 - 24);
+
+		GameObject vertScroll = _ui.CreateScrollBar(empWinListBack, true, true);
+		vertScroll.GetComponent<Scrollbar>().direction = Scrollbar.Direction.BottomToTop;
+		RectTransform vsr = vertScroll.GetComponent<RectTransform>();
+		_ui.SetTransform(vertScroll, 774, -24, 10, 500 - 28 - 24);
+		Scrollbar sb = vertScroll.GetComponent<Scrollbar>();
+
+		// value, size, number of steps
+		sb.size = 1.0f;
+		sb.value = 0.0f;
+
+		//vsr.anchorMin = new Vector2(1, 0);
+		//vsr.anchorMax = new Vector2(1, 1);
+		//vsr.anchoredPosition = new Vector2(-8, 0);
+		//vsr.sizeDelta = new Vector2(8, 0.0f);
+
 		// TODO: Header for table
 
+		_empListContent = empWinEntryList;
+
+		//GameObject empWinListBacking = _ui.CreateElement(empWinListBack, "listBacking");
+		//_ui.AddImage(empWinListBacking, _style.ThemeColorA);
+		//_ui.SetTransform(empWinListBacking, 0, 0, 54, 500 - 28);
+
+		/*
 		GameObject empWinListContent;
 		GameObject empWinListScrollView = _ui.CreateScrollView(empWinListBack, out empWinListContent, false, true);
 		_ui.SetTransform(empWinListScrollView, 0, -28, 784, 500 - 28 - 28);
 		_empListContent = empWinListContent;
+		*/
 
 		//--------------------------------------------------------------------
 		// Notify Stack UI
@@ -344,11 +440,25 @@ public class CUserSession
 		nameTextComp.alignment = TextAnchor.MiddleLeft;
 
 		GameObject rankText = _ui.CreateElement(entry);
-		_ui.SetTransform(rankText, 200, 0, 200, 54);
+		_ui.SetTransform(rankText, 180, 0, 200, 54);
 		Text rankTextComp = rankText.AddComponent<Text>();
 		rankTextComp.font = _style.FontA;
 		rankTextComp.text = CGame.AssetManager.mUnitRules.GetTier(Stats.mTier).mTitle;
 		rankTextComp.alignment = TextAnchor.MiddleLeft;
+
+		GameObject iqText = _ui.CreateElement(entry);
+		_ui.SetTransform(iqText, 300, 0, 200, 54);
+		Text iqTextComp = iqText.AddComponent<Text>();
+		iqTextComp.font = _style.FontA;
+		iqTextComp.text = Stats.mIntelligence.ToString();
+		iqTextComp.alignment = TextAnchor.MiddleLeft;
+
+		GameObject salaryText = _ui.CreateElement(entry);
+		_ui.SetTransform(salaryText, 400, 0, 200, 54);
+		Text salaryTextComp = salaryText.AddComponent<Text>();
+		salaryTextComp.font = _style.FontA;
+		salaryTextComp.text = Stats.mSalary.ToString();
+		salaryTextComp.alignment = TextAnchor.MiddleLeft;
 
 		if (Resume)
 		{
@@ -367,21 +477,79 @@ public class CUserSession
 			iconImg.AddComponent<Image>().sprite = _style.Sprites[6];
 
 			GameObject lvlText = _ui.CreateElement(entry);
-			_ui.SetTransform(lvlText, 340, 0, 200, 54);
+			_ui.SetTransform(lvlText, 470, 0, 20, 54);
 			Text textComp = lvlText.AddComponent<Text>();
 			textComp.font = _style.FontA;
 			textComp.text = Stats.mLevel.ToString();
-			textComp.alignment = TextAnchor.MiddleLeft;
+			textComp.alignment = TextAnchor.MiddleRight;
 
-			GameObject staminaBar = _ui.CreateElement(entry);
-			_ui.SetTransform(staminaBar, 500, -20, 54, 14);
-			_ui.AddImage(staminaBar, _style.ThemeColorC);
+			{
+				GameObject staminaBar = _ui.CreateElement(entry);
+				_ui.SetTransform(staminaBar, 500, -23, 54, 8);
+				_ui.AddImage(staminaBar, _style.ThemeColorE);
 
-			GameObject staminaBarFill = _ui.CreateElement(staminaBar);
-			_ui.SetTransform(staminaBarFill, 0, 0, 54, 14);
-			_ui.AddImage(staminaBarFill, _style.ThemeColorA);
+				GameObject staminaBarCap = _ui.CreateElement(entry);
+				_ui.SetTransform(staminaBarCap, 552, -23, 2, 8);
+				_ui.AddImage(staminaBarCap, _style.ThemeColorE);
 
-			result.mStaminaBar = staminaBarFill.GetComponent<RectTransform>();
+				result.mStaminaBar = staminaBar.GetComponent<RectTransform>();
+			}
+
+			// Status
+			{
+				GameObject staminaBar = _ui.CreateElement(entry);
+				_ui.SetTransform(staminaBar, 600, -13, 54, 8);
+				_ui.AddImage(staminaBar, _style.ThemeColorA);
+
+				GameObject staminaBarCap = _ui.CreateElement(entry);
+				_ui.SetTransform(staminaBarCap, 652, -13, 2, 8);
+				_ui.AddImage(staminaBarCap, _style.ThemeColorA);
+
+				result.mStaminaBar = staminaBar.GetComponent<RectTransform>();
+			}
+
+			{
+				GameObject staminaBar = _ui.CreateElement(entry);
+				_ui.SetTransform(staminaBar, 600, -23, 54, 8);
+				_ui.AddImage(staminaBar, _style.ThemeColorF);
+
+				GameObject staminaBarCap = _ui.CreateElement(entry);
+				_ui.SetTransform(staminaBarCap, 652, -23, 2, 8);
+				_ui.AddImage(staminaBarCap, _style.ThemeColorF);
+
+				result.mStaminaBar = staminaBar.GetComponent<RectTransform>();
+			}
+
+			{
+				GameObject staminaBar = _ui.CreateElement(entry);
+				_ui.SetTransform(staminaBar, 600, -33, 54, 8);
+				_ui.AddImage(staminaBar, _style.ThemeColorG);
+
+				GameObject staminaBarCap = _ui.CreateElement(entry);
+				_ui.SetTransform(staminaBarCap, 652, -33, 2, 8);
+				_ui.AddImage(staminaBarCap, _style.ThemeColorG);
+
+				result.mStaminaBar = staminaBar.GetComponent<RectTransform>();
+			}
+
+			// Skill
+			{
+				GameObject skillBlip = _ui.CreateElement(entry);
+				_ui.SetTransform(skillBlip, 700, -23, 8, 8);
+				skillBlip.AddComponent<Image>().color = new Color(1, 1, 1);
+			}
+
+			{
+				GameObject skillBlip = _ui.CreateElement(entry);
+				_ui.SetTransform(skillBlip, 710, -23, 8, 8);
+				skillBlip.AddComponent<Image>().color = new Color(1, 1, 1);
+			}
+
+			{
+				GameObject skillBlip = _ui.CreateElement(entry);
+				_ui.SetTransform(skillBlip, 720, -23, 8, 8);
+				skillBlip.AddComponent<Image>().color = new Color(1, 1, 1);
+			}
 		}
 
 		return result;
@@ -913,9 +1081,19 @@ public class CUserSession
 		});
 	}
 
+	private float _testCount = 0;
+
 	public void OnEmployeeAdded(CUnitView Unit)
 	{
+		//Unit.mUIEmployeeEntry = CreateEmpEntry(_empListContent, Unit.mStats, Unit.mIntern, false);
+
 		Unit.mUIEmployeeEntry = CreateEmpEntry(_empListContent, Unit.mStats, Unit.mIntern, false);
+
+		RectTransform rect = Unit.mUIEmployeeEntry.mGob.GetComponent<RectTransform>();
+
+		rect.anchoredPosition = new Vector2(0, _testCount);
+
+		_testCount -= 54;
 	}
 
 	public void OnEmployeeRemoved(CUnitView Unit)
@@ -930,10 +1108,12 @@ public class CUserSession
 	{
 		++_newResumes;
 
+		/*
 		Resume.mUIEmployeeEntry = CreateEmpEntry(_empListContent, Resume.mStats, false, true, () => {
 			Resume.mUIEmployeeEntry.mGob.SetActive(false);
 			_gameSession.PushUserAction(new CUserAction(CUserAction.EType.ACCEPT_RESUME, Resume.mID, 0, 0));
 		});
+		*/
 
 		/*
 		Resume.mUIElement = _ui.CreateTextElement(_uiNotifyList, "Resume: " + Resume.mStats.mName);
@@ -1659,6 +1839,10 @@ public class CUserSession
 		{
 			_newResumeBlip.SetActive(false);
 		}
+
+		// Update Employee UI Screens.
+
+		
 		
 		// TODO: Pull timer data from contract views for notify timer bar? (Rather than push from contract views)
 		_UpdateNotifyStackIcons();

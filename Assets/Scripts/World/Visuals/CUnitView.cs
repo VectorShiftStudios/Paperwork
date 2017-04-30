@@ -682,7 +682,7 @@ public class CUnitView : CStateView, ISelectable
 
 			if (mUIEmployeeEntry != null)
 			{
-				mUIEmployeeEntry.mStaminaBar.localScale = new Vector3(mStamina / mStats.mMaxStamina, 1, 1);
+				//mUIEmployeeEntry.mStaminaBar.localScale = new Vector3(mStamina / mStats.mMaxStamina, 1, 1);
 			}
 		}
 
