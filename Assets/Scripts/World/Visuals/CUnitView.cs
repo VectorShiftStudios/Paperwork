@@ -860,6 +860,8 @@ public class CUnitView : CStateView, ISelectable
 	{
 		Renderers.Add(_Gob.transform.GetChild(0).GetChild(0).GetComponent<Renderer>());
 
+		Renderers.Add(_tieGob.GetComponent<Renderer>());
+
 		if (_carryGOB != null)
 			Renderers.Add(_carryGOB.GetComponent<MeshRenderer>());
 

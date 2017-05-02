@@ -40,6 +40,8 @@ public class CUIManager
 	public CContextMenu mContextMenu;
 	public CTooltip mTooltip;
 
+	public RenderTexture mPoseRT;
+
 	public GameObject mErrorMessageBox;
 
 	public bool mMenuShowing;
@@ -57,6 +59,9 @@ public class CUIManager
 		_ui = Toolkit;
 		_style = Style;
 		_uiRes = CGame.UIResources;
+
+		mPoseRT = new RenderTexture(512, 512, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
+		mPoseRT.antiAliasing = 8; 
 
 		gameUI = _ui.CreateElement(_ui.Canvas, "gameUI");
 		_ui.SetRectFillParent(gameUI);

@@ -474,7 +474,9 @@ public class CUserSession
 		{
 			GameObject iconImg = _ui.CreateElement(entry, "img");
 			_ui.SetTransform(iconImg, 0, 0, 54, 54);
-			iconImg.AddComponent<Image>().sprite = _style.Sprites[6];
+			RawImage iconRaw = iconImg.AddComponent<RawImage>();
+			iconRaw.texture = CGame.UIManager.mPoseRT;
+			iconRaw.uvRect = new Rect(50.0f / 512.0f, 0, -50.0f / 512.0f, 50.0f / 512.0f);
 
 			GameObject lvlText = _ui.CreateElement(entry);
 			_ui.SetTransform(lvlText, 470, 0, 20, 54);
@@ -1822,6 +1824,23 @@ public class CUserSession
 					}
 				}
 			}
+
+			// Render Unit Poses for employee menu
+			// TODO: Only if employee menu is open!
+			List<Renderer> poseRenderers = new List<Renderer>();
+
+			for (int i = 0; i < _worldView.mStateViews.Count; ++i)
+			{
+				CUnitView view = _worldView.mStateViews[i] as CUnitView;
+
+				if (view != null)
+				{
+					((ISelectable)view).GetRenderers(poseRenderers);
+					break;
+				}
+			}
+
+			CGame.CameraManager.mMainCamera.GetComponent<CCamera>().SetPoseRenderers(poseRenderers);
 		}
 		
 		// Update UI stuff from the world state.

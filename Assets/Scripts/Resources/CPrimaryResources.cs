@@ -6,6 +6,11 @@ public class CPrimaryResources : MonoBehaviour
 {
 	public Camera PrimaryCamera;
 
+
+	public float X = 0.0f;
+	public float Y = -225.0f;
+	public float Z = 0.0f;
+
 	public Shader DebugLinesShader;
 	public Shader DebugLinesNoDepthShader;
 

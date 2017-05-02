@@ -112,21 +112,42 @@ public class CGame
 		string[] parms;
 
 #if !UNITY_EDITOR
+		DataDirectory = Application.dataPath + "/Data/";
+		PersistentDataDirectory = Application.persistentDataPath + "/";
+#else
+		DataDirectory = "Data/";
+		PersistentDataDirectory = "SaveData/";
+#endif
+
+		Config = new CConfig(PersistentDataDirectory + "config.txt");
+		Config.Load();
+
+#if !UNITY_EDITOR
+		DataDirectory = Application.dataPath + "/Data/";
+		PersistentDataDirectory = Application.persistentDataPath + "/";
+
 		if (_CheckArg("dev", out parms))
 		{
 			Screen.SetResolution(1280, 720, false);
 		}
 		else
 		{
-			Resolution r = Screen.resolutions[Screen.resolutions.Length - 1];
-			Screen.SetResolution(r.width, r.height, true);
-		}
+			string resType = Config.GetString("ResolutionType");
 
-		DataDirectory = Application.dataPath + "/Data/";
-		PersistentDataDirectory = Application.persistentDataPath + "/";
-#else
-		DataDirectory = "Data/";
-		PersistentDataDirectory = "SaveData/";
+			if (resType == "default")
+			{
+				Resolution r = Screen.resolutions[Screen.resolutions.Length - 1];
+				Screen.SetResolution(r.width, r.height, true);
+			}
+			else if (resType == "fullscreen" || resType == "windowed")
+			{
+				Resolution r = Screen.resolutions[Screen.resolutions.Length - 1];
+				int resX = (int)Config.GetFloat("ResolutionWidth");
+				int resY = (int)Config.GetFloat("ResolutionHeight");
+
+				Screen.SetResolution(resX, resY, (resType == "fullscreen"));
+			}
+		}
 #endif
 
 		CUtility.MakeDirectory(PersistentDataDirectory + SAVES_DIRECTORY);
@@ -142,9 +163,6 @@ public class CGame
 		
 		Debug.Log("Save game directory: " + PersistentDataDirectory);
 		Debug.Log("Data directory: " + DataDirectory);
-
-		Config = new CConfig(PersistentDataDirectory + "config.txt");
-		Config.Load();
 
 		VarShowGrid = Console.CreateVar("show_grid", false);
 		VarShowVisLines = Console.CreateVar("show_los", false);

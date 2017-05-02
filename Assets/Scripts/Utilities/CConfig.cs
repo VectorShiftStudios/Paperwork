@@ -22,6 +22,10 @@ public class CConfig
 		_entries.Add("SoundsVolume", 1.ToString());
 		_entries.Add("UISoundsVolume", 1.ToString());
 
+		_entries.Add("ResolutionType", "default");
+		_entries.Add("ResolutionWidth", "1280");
+		_entries.Add("ResolutionHeight", "720");
+
 		_entries.Add("KeyConsole", KeyCode.BackQuote.ToString());
 		_entries.Add("KeyEscape", KeyCode.Escape.ToString());
 		_entries.Add("KeyOptionsMenu", KeyCode.F10.ToString());
